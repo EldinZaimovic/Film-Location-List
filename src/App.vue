@@ -154,6 +154,7 @@
                   </v-dialog>
                 </template>
                 <v-alert
+                  outline
                   slot="no-results"
                   :value="true"
                   color="error"
