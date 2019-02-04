@@ -60,7 +60,7 @@
       dark
     >
       <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Film Locations</v-toolbar-title>
+      <v-toolbar-title v-if="!isMobile">Film Locations</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field v-model="search" append-icon="search" label="Search" single-line clearable flat></v-text-field>
       <v-menu
