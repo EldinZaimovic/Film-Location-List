@@ -107,7 +107,7 @@
                     <td>{{ props.item.release_year }}</td>
                     <td>{{ props.item.director }}</td>
                   </tr>
-                  <tr v-else @click="props.expanded = !props.expanded">
+                  <tr v-else @click="dialog = true; props.expanded = !props.expanded">
                     <td>
                       <ul class="flex-content">
                         <li class="flex-item" data-label="Title">{{ props.item.title }}</li>
@@ -118,7 +118,7 @@
                   </tr>
                 </template>
                 <template slot="expand" slot-scope="props">
-                  <v-card flat light>
+                  <v-card v-if="!isMobile" flat light>
                     <v-card-text>
                       <div class="font-weight-bold">Location
                         <v-icon small>fas fa-map-marker-alt</v-icon>
@@ -134,6 +134,24 @@
                       {{props.item.writer}}
                     </v-card-text>
                   </v-card>
+                  <v-dialog v-else v-model="dialog" max-width="290">
+                    <v-card>
+                      <v-card-text>
+                        <div class="font-weight-bold">Location
+                          <v-icon small>fas fa-map-marker-alt</v-icon>
+                        </div>
+                        {{props.item.locations}}
+                        <div class="font-weight-bold">Actors
+                          <v-icon small>fas fa-users</v-icon>
+                        </div>
+                        {{props.item.actor_1}}, {{props.item.actor_2}}
+                        <div class="font-weight-bold">Writer
+                          <v-icon small>fas fa-user-edit</v-icon>
+                        </div>
+                        {{props.item.writer}}
+                      </v-card-text>
+                    </v-card>
+                  </v-dialog>
                 </template>
                 <v-alert
                   slot="no-results"
@@ -165,6 +183,7 @@ export default {
   data() {
     return {
       expand: false,
+      dialog: false,
       pagination: {
         sortBy: "name"
       },
